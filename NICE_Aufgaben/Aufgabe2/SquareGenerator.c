@@ -18,24 +18,22 @@ int ** genMagic(int n)
         arr[i] = (int *) malloc( sizeof(int) * n);
 
     /* erstelle das Magische Quadrat */
-    for(i=0; i<n; i++)
+    for(i = 0; i < SIZE; i++)
     {
-        for(j=0; j<n; j++)
+        for(j = 0; j < SIZE; j++)
         {
-            int a_ij = 0;
-            int b_ij = 0;
+            int a_ij, b_ij;
+            if( ((i+j) % SIZE) % 2 == 0 )
+		a_ij = ((i+j) % SIZE);
+	    else
+                a_ij = (SIZE + (i+j) % SIZE);
 
-            if( (i+j) % n == 0 )
-                a_ij = (i+j) % n;
+            if( ((i-j+SIZE)%SIZE) % 2 == 1)
+		b_ij = SIZE * (((i-j+SIZE) % SIZE ) - 1);
             else
-                a_ij = n + (i+j) % n;
-
-            if( ((i-j+n)%n)%2 == 0 )
-                b_ij = n*(((i-j+n)%n)-1);
-            else
-                b_ij = n*(n - 1 + (i-j+n)%n);
-
-            arr[i][j] = 0.5 * (a_ij + b_ij);
+		b_ij = SIZE * (SIZE - 1 + (i - j + SIZE) % SIZE );
+  
+            arr[i][j] = 0.5 * (a_ij + b_ij); 
         }
     }
     
